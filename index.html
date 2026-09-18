@@ -120,22 +120,342 @@
     /* =========================
        HERO
     ========================= */
+<section class="hero">
 
+  <!-- 메인 배너 이미지 -->
+  <div class="hero-slides">
 
-    }
+    <img
+      src="school1.jpg"
+      class="hero-slide active"
+      alt="학교 활동 사진">
 
-    /* 
-      
-      
-    }
+    <img
+      src="school2.gif"
+      class="hero-slide"
+      alt="학교 활동 사진">
 
+    <img
+      src="school3.jpg"
+      class="hero-slide"
+      alt="학교 활동 사진">
+
+  </div>
+
+  <!-- 사진 위 어두운 효과 -->
+  <div class="hero-overlay"></div>
+
+  <!-- 학교 문구 -->
+  <div class="hero-title">
+    <p>서로 존중하고 함께 배우는</p>
+    <strong>행복한 봉선초등학교</strong>
+  </div>
+
+  <!-- 슬라이드 버튼 -->
+  <div class="slider">
+
+    <button
+      class="slide-dot active"
+      onclick="showSlide(0)">
+    </button>
+
+    <button
+      class="slide-dot"
+      onclick="showSlide(1)">
+    </button>
+
+    <button
+      class="slide-dot"
+      onclick="showSlide(2)">
+    </button>
+
+    <button
+      class="pause-button"
+      onclick="toggleSlide()">
+      Ⅱ
+    </button>
+
+  </div>
+
+</section>
+
+    /* =========================
+   메인 사진 배너
+========================= */
+
+.hero {
+  height: 330px;
+  position: relative;
+  overflow: hidden;
+  background: #222;
+}
+
+/* 사진 영역 */
+
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 각각의 사진 */
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 0;
+
+  transition: opacity 0.8s ease;
+}
+
+/* 현재 사진 */
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+/* 사진 위 어두운 효과 */
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.05),
+    rgba(0,0,0,0.25)
+  );
+
+  z-index: 2;
+}
+
+/* 문구 */
+
+.hero-title {
+  position: absolute;
+
+  top: 45px;
+  right: 45px;
+
+  color: white;
+  text-align: right;
+
+  z-index: 3;
+
+  text-shadow:
+    0 2px 5px rgba(0,0,0,0.5);
+}
+
+.hero-title p {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.hero-title strong {
+  font-size: 27px;
+  font-weight: 900;
+}
+
+/* 슬라이드 버튼 */
+
+.slider {
+  position: absolute;
+
+  bottom: 18px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 18px;
+
+  background: rgba(255,255,255,0.95);
+
+  border-radius: 40px;
+
+  z-index: 5;
+}
+
+/* 점 */
+
+.slide-dot {
+  width: 17px;
+  height: 17px;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #f8d45a;
+
+  transition: .3s;
+}
+
+/* 선택된 점 */
+
+.slide-dot.active {
+  width: 70px;
+
+  border-radius: 20px;
+
+  background: #ffb000;
+}
+
+/* 일시정지 */
+
+.pause-button {
+  border: none;
+  background: transparent;
+
+  font-size: 17px;
+  font-weight: bold;
+
+  color: #555;
+}
+
+/* =========================
+   모바일
+========================= */
+
+@media (max-width: 700px) {
+
+  .hero {
+    height: 330px;
+  }
+
+  .hero-title {
+    top: 35px;
+    right: 20px;
+  }
+
+  .hero-title p {
+    font-size: 13px;
+  }
+
+  .hero-title strong {
+    font-size: 20px;
+  }
+
+  .slider {
+    bottom: 12px;
+  }
+
+  .slide-dot.active {
+    width: 55px;
+  }
+}
+
+    
     /* =========================
        MAIN
     ========================= */
 
-    main {
-      padding: 35px;
-    }
+  /* =========================
+   메인 배너 슬라이드
+========================= */
+
+let currentSlide = 0;
+let slideTimer;
+let isPlaying = true;
+
+const slides = document.querySelectorAll(".hero-slide");
+const dots = document.querySelectorAll(".slide-dot");
+
+
+function showSlide(index) {
+
+  currentSlide = index;
+
+  /* 모든 사진 숨기기 */
+
+  slides.forEach(slide => {
+    slide.classList.remove("active");
+  });
+
+  /* 모든 버튼 초기화 */
+
+  dots.forEach(dot => {
+    dot.classList.remove("active");
+  });
+
+  /* 선택한 사진 표시 */
+
+  slides[index].classList.add("active");
+
+  /* 선택한 버튼 표시 */
+
+  dots[index].classList.add("active");
+}
+
+
+/* 다음 사진 */
+
+function nextSlide() {
+
+  currentSlide++;
+
+  if (currentSlide >= slides.length) {
+    currentSlide = 0;
+  }
+
+  showSlide(currentSlide);
+}
+
+
+/* 자동 재생 */
+
+function startSlide() {
+
+  slideTimer = setInterval(
+    nextSlide,
+    4000
+  );
+}
+
+
+/* 일시정지 / 재생 */
+
+function toggleSlide() {
+
+  const button =
+    document.querySelector(".pause-button");
+
+  if (isPlaying) {
+
+    clearInterval(slideTimer);
+
+    button.innerText = "▶";
+
+    isPlaying = false;
+
+  } else {
+
+    startSlide();
+
+    button.innerText = "Ⅱ";
+
+    isPlaying = true;
+  }
+}
+
+
+/* 시작 */
+
+startSlide();
 
     /* =========================
        NOTICE
