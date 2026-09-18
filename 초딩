@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>봉선초등학교</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family:
+        "Noto Sans KR",
+        "Apple SD Gothic Neo",
+        Arial,
+        sans-serif;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       전체 컨테이너
+    ========================= */
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      background: white;
+      min-height: 100vh;
+      box-shadow: 0 0 30px rgba(0,0,0,0.06);
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      height: 125px;
+      padding: 25px 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .school-symbol {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background: #f8d429;
+      border: 6px solid #72b94a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+    }
+
+    .school-name h1 {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .school-name p {
+      margin-top: 2px;
+      font-size: 13px;
+      color: #555;
+      font-weight: 600;
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .header-btn {
+      width: 65px;
+      height: 65px;
+      border: none;
+      border-radius: 13px;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .login-btn {
+      background: #16a9dc;
+    }
+
+    .home-btn {
+      background: #7ac174;
+    }
+
+    .menu-btn {
+      background: #f6a400;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      height: 330px;
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          to bottom,
+          #75c7f2 0%,
+          #bde9ff 65%,
+          #ffffff 65%
+        );
+    }
+
+    /* 구름 */
+
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 100px;
+      opacity: 0.9;
+    }
+
+    .cloud.one {
+      width: 150px;
+      height: 45px;
+      top: 35px;
+      left: 60px;
+    }
+
+    .cloud.two {
+      width: 200px;
+      height: 55px;
+      top: 70px;
+      right: 80px;
+    }
+
+    /* 학교 건물 */
+
+    .school-building {
+      position: absolute;
+      bottom: 0;
+      left: 7%;
+      width: 86%;
+      height: 190px;
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .building {
+      position: relative;
+      background: #f8f1dc;
+      border: 5px solid #e0b66c;
+      height: 145px;
+      flex: 1;
+    }
+
+    .building.center {
+      height: 185px;
+      background: #e9d6b2;
+    }
+
+    .windows {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      padding: 15px;
+    }
+
+    .window {
+      height: 28px;
+      background: #48a9d6;
+      border: 2px solid #fff;
+    }
+
+    .door {
+      position: absolute;
+      width: 48px;
+      height: 65px;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #777;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .hero-title {
+      position: absolute;
+      top: 25px;
+      right: 45px;
+      color: white;
+      text-align: center;
+      text-shadow: 0 1px 3px rgba(0,0,0,.15);
+    }
+
+    .hero-title p {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .hero-title strong {
+      display: block;
+      font-size: 25px;
+      margin-top: 5px;
+    }
+
+    .slider {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 10px 18px;
+      border-radius: 40px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .slide-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #f9cf52;
+    }
+
+    .slide-dot.active {
+      width: 80px;
+      border-radius: 20px;
+      background: #ffb300;
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main {
+      padding: 35px;
+    }
+
+    /* =========================
+       NOTICE
+    ========================= */
+
+    .notice-box {
+      border: 4px solid #b9ccef;
+      border-radius: 25px;
+      overflow: hidden;
+    }
+
+    .notice-tabs {
+      display: flex;
+      height: 80px;
+      border-bottom: 1px dashed #bbb;
+    }
+
+    .notice-tab {
+      flex: 1;
+      border: none;
+      background: white;
+      font-size: 23px;
+      font-weight: 700;
+      color: #444;
+    }
+
+    .notice-tab.active {
+      background: #14a6d7;
+      color: white;
+      margin: 10px 10px 0;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .notice-content {
+      padding: 25px 30px;
+    }
+
+    .notice-main {
+      padding: 18px;
+      border: 2px dotted #9bc5dc;
+      border-radius: 0 0 25px 25px;
+      margin-bottom: 15px;
+    }
+
+    .notice-main h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .notice-main .date {
+      text-align: right;
+      color: #666;
+    }
+
+    .notice-list {
+      list-style: none;
+    }
+
+    .notice-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      font-size: 17px;
+    }
+
+    .notice-icon {
+      width: 25px;
+      height: 25px;
+      background: #f39800;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .notice-list .date {
+      margin-left: auto;
+      color: #777;
+    }
+
+    /* =========================
+       CALENDAR
+    ========================= */
+
+    .calendar {
+      background: #eff7ff;
+      padding: 30px;
+      min-height: 200px;
+      position: relative;
+    }
+
+    .calendar h2 {
+      color: #9b6500;
+      font-size: 30px;
+    }
+
+    .calendar h2 span {
+      font-size: 40px;
+      margin-right: 8px;
+    }
+
+    .calendar-buttons {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      display: flex;
+      gap: 5px;
+    }
+
+    .calendar-buttons button {
+      width: 48px;
+      height: 48px;
+      border: 1px solid #ccc;
+      background: white;
+      border-radius: 50%;
+      font-size: 25px;
+    }
+
+    #schedule {
+      margin-top: 25px;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       QUICK MENU
+    ========================= */
+
+    .quick-menu {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .quick-item {
+      background: white;
+      border: 2px solid #dbe4ee;
+      border-radius: 20px;
+      padding: 25px 10px;
+      text-align: center;
+      transition: .2s;
+    }
+
+    .quick-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    }
+
+    .quick-icon {
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
+
+    .quick-item strong {
+      font-size: 16px;
+    }
+
+    /* =========================
+       GALLERY
+    ========================= */
+
+    .section-title {
+      margin-top: 40px;
+      margin-bottom: 15px;
+      font-size: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .gallery-card {
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .gallery-image {
+      height: 170px;
+      background:
+        linear-gradient(135deg, #e9d8bd, #f6eee1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+    }
+
+    .gallery-card p {
+      padding: 15px;
+      font-size: 17px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* =========================
+       MEAL
+    ========================= */
+
+    .meal {
+      margin-top: 35px;
+      border-radius: 25px;
+      padding: 30px;
+      background: #13b99a;
+      color: white;
+    }
+
+    .meal h2 {
+      font-size: 25px;
+      margin-bottom: 20px;
+    }
+
+    .meal-date {
+      display: inline-block;
+      background: white;
+      color: #444;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .meal-food {
+      background: white;
+      color: #333;
+      border-radius: 15px;
+      padding: 18px;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       SERVICE
+    ========================= */
+
+    .service {
+      margin-top: 35px;
+      border: 3px solid #79c47b;
+      border-radius: 25px;
+      overflow: hidden;
+    }
+
+    .service-title {
+      background: #79c47b;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 23px;
+      font-weight: 700;
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .service-list a {
+      padding: 18px;
+      border-bottom: 1px dotted #ccc;
+      font-size: 17px;
+    }
+
+    .service-list a:hover {
+      background: #f2fbf1;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: #333;
+      color: white;
+      margin-top: 40px;
+      padding: 25px 35px;
+    }
+
+    .footer-menu {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .footer-menu a {
+      color: #ddd;
+    }
+
+    .copyright {
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       모바일
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      header {
+        height: auto;
+        padding: 18px;
+      }
+
+      .school-symbol {
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+        border-width: 4px;
+      }
+
+      .school-name h1 {
+        font-size: 22px;
+      }
+
+      .school-name p {
+        font-size: 10px;
+      }
+
+      .header-buttons {
+        gap: 5px;
+      }
+
+      .header-btn {
+        width: 43px;
+        height: 43px;
+        font-size: 20px;
+        border-radius: 10px;
+      }
+
+      .hero {
+        height: 270px;
+      }
+
+      .hero-title {
+        right: 20px;
+        top: 20px;
+      }
+
+      .hero-title p {
+        font-size: 13px;
+      }
+
+      .hero-title strong {
+        font-size: 18px;
+      }
+
+      .school-building {
+        left: 2%;
+        width: 96%;
+        height: 130px;
+      }
+
+      .building {
+        height: 100px;
+      }
+
+      .building.center {
+        height: 130px;
+      }
+
+      .windows {
+        padding: 8px;
+        gap: 3px;
+      }
+
+      .window {
+        height: 17px;
+      }
+
+      .door {
+        width: 30px;
+        height: 45px;
+      }
+
+      main {
+        padding: 15px;
+      }
+
+      .notice-tabs {
+        height: 60px;
+      }
+
+      .notice-tab {
+        font-size: 16px;
+      }
+
+      .notice-content {
+        padding: 15px;
+      }
+
+      .notice-main h2 {
+        font-size: 17px;
+      }
+
+      .notice-list li {
+        font-size: 14px;
+      }
+
+      .notice-list .date {
+        font-size: 12px;
+      }
+
+      .calendar {
+        padding: 20px;
+      }
+
+      .calendar h2 {
+        font-size: 22px;
+      }
+
+      .calendar h2 span {
+        font-size: 30px;
+      }
+
+      .calendar-buttons {
+        top: 15px;
+        right: 15px;
+      }
+
+      .calendar-buttons button {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+      }
+
+      .quick-menu {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .service-list {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-menu {
+        gap: 15px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+
+    <div class="logo-area">
+
+      <div class="school-symbol">
+        🌞
+      </div>
+
+      <div class="school-name">
+        <h1>봉선초등학교</h1>
+        <p>Bongseon Elementary School</p>
+      </div>
+
+    </div>
+
+    <div class="header-buttons">
+      <button class="header-btn login-btn" onclick="alert('로그인 페이지입니다.')">
+        🔒
+      </button>
+
+      <button class="header-btn home-btn" onclick="location.href='#'">
+        🏠
+      </button>
+
+      <button class="header-btn menu-btn" onclick="toggleMenu()">
+        ☰
+      </button>
+    </div>
+
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+
+    <div class="hero-title">
+      <p>서로 존중하고 함께 배우는</p>
+      <strong>행복한 봉선초등학교</strong>
+    </div>
+
+    <div class="school-building">
+
+      <div class="building">
+        <div class="windows">
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+        </div>
+        <div class="door"></div>
+      </div>
+
+      <div class="building center">
+        <div class="windows">
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+        </div>
+        <div class="door"></div>
+      </div>
+
+      <div class="building">
+        <div class="windows">
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+        </div>
+        <div class="door"></div>
+      </div>
+
+    </div>
+
+    <div class="slider">
+      <div class="slide-dot active"></div>
+      <div class="slide-dot"></div>
+      <span>Ⅱ</span>
+    </div>
+
+  </section>
+
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- 공지사항 -->
+    <section class="notice-box">
+
+      <div class="notice-tabs">
+
+        <button
+          class="notice-tab active"
+          onclick="changeTab(this, 'notice')">
+          공지사항
+        </button>
+
+        <button
+          class="notice-tab"
+          onclick="changeTab(this, 'education')">
+          일일교육활동
+        </button>
+
+        <button
+          class="notice-tab"
+          onclick="changeTab(this, 'letter')">
+          가정통신문
+        </button>
+
+      </div>
+
+
+      <div class="notice-content">
+
+        <div class="notice-main">
+          <h2 id="mainNotice">
+            나이스 학부모서비스를 이용한 교육활동 확인 안내
+          </h2>
+
+          <div class="date">
+            2026-05-22
+          </div>
+        </div>
+
+
+        <ul class="notice-list">
+
+          <li>
+            <span class="notice-icon">◀</span>
+            <span>교외체험학습 신청서 및 결과보고서 안내</span>
+            <span class="date">26-04-28</span>
+          </li>
+
+          <li>
+            <span class="notice-icon">◀</span>
+            <span>2026학년도 교과서 출판사 안내</span>
+            <span class="date">26-03-03</span>
+          </li>
+
+          <li>
+            <span class="notice-icon">◀</span>
+            <span>2025학년도 출결 관련 안내</span>
+            <span class="date">26-03-31</span>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <!-- 이달의 행사 -->
+      <div class="calendar">
+
+        <h2>
+          <span>09월</span>
+          이달의 행사
+        </h2>
+
+        <div class="calendar-buttons">
+          <button onclick="previousMonth()">‹</button>
+          <button onclick="nextMonth()">›</button>
+        </div>
+
+        <div id="schedule">
+          📚 9월 18일 — 학교 행사 및 교육활동<br>
+          🚌 9월 22일 — 현장체험학습<br>
+          🎨 9월 25일 — 학급별 교육활동
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 바로가기 -->
+    <h2 class="section-title">🚀 바로가기</h2>
+
+    <div class="quick-menu">
+
+      <a class="quick-item" href="#">
+        <div class="quick-icon">🧪</div>
+        <strong>늘봄학교 신청</strong>
+      </a>
+
+      <a class="quick-item" href="#">
+        <div class="quick-icon">🔔</div>
+        <strong>e알리미</strong>
+      </a>
+
+      <a class="quick-item" href="#">
+        <div class="quick-icon">🌱</div>
+        <strong>광주늘봄지니</strong>
+      </a>
+
+      <a class="quick-item" href="#">
+        <div class="quick-icon">🏫</div>
+        <strong>교외체험학습 신청</strong>
+      </a>
+
+    </div>
+
+
+    <!-- 학급 홈페이지 -->
+    <h2 class="section-title">📚 학급홈페이지</h2>
+
+    <div class="quick-menu">
+
+      <a class="quick-item" href="#" onclick="selectGrade(1)">
+        <strong>1학년</strong>
+      </a>
+
+      <a class="quick-item" href="#" onclick="selectGrade(2)">
+        <strong>2학년</strong>
+      </a>
+
+      <a class="quick-item" href="#" onclick="selectGrade(3)">
+        <strong>3학년</strong>
+      </a>
+
+      <a class="quick-item" href="#" onclick="selectGrade(4)">
+        <strong>4학년</strong>
+      </a>
+
+      <a class="quick-item" href="#" onclick="selectGrade(5)">
+        <strong>5학년</strong>
+      </a>
+
+      <a class="quick-item" href="#" onclick="selectGrade(6)">
+        <strong>6학년</strong>
+      </a>
+
+    </div>
+
+
+    <!-- 갤러리 -->
+    <h2 class="section-title">
+      📷 봉선갤러리
+    </h2>
+
+    <div class="gallery">
+
+      <div class="gallery-card">
+        <div class="gallery-image">📖</div>
+        <p>책표지 종이가방 만들기</p>
+      </div>
+
+      <div class="gallery-card">
+        <div class="gallery-image">🎨</div>
+        <p>즐거운 미술 활동</p>
+      </div>
+
+      <div class="gallery-card">
+        <div class="gallery-image">🌱</div>
+        <p>학교 생태 체험활동</p>
+      </div>
+
+    </div>
+
+
+    <!-- 급식 -->
+    <section class="meal">
+
+      <h2>🍚 오늘의 식단</h2>
+
+      <div class="meal-date">
+        2026년 09월 18일
+      </div>
+
+      <div class="meal-food">
+        🍚 잡곡밥<br>
+        🍲 된장찌개<br>
+        🥩 돼지고기볶음<br>
+        🥬 배추김치<br>
+        🍎 과일
+      </div>
+
+    </section>
+
+
+    <!-- SERVICE -->
+    <section class="service">
+
+      <div class="service-title">
+        SERVICE 바로가기
+      </div>
+
+      <div class="service-list">
+
+        <a href="#">🧬 교육행정정보시스템</a>
+        <a href="#">⚛️ 업무포털</a>
+        <a href="#">🏫 광주광역시교육청</a>
+        <a href="#">🏛️ 서부교육지원청</a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="footer-menu">
+      <a href="#">홈으로</a>
+      <a href="#">로그인</a>
+      <a href="#">회원가입</a>
+      <a href="#">사이트맵</a>
+      <a href="#">TOP</a>
+    </div>
+
+    <div class="copyright">
+      봉선초등학교<br>
+      본 사이트는 학교 홈페이지 디자인을 참고하여 제작한 예제입니다.
+    </div>
+
+  </footer>
+
+</div>
+
+
+<script>
+
+  /* 메뉴 버튼 */
+
+  function toggleMenu() {
+    alert(
+      "메뉴\n\n" +
+      "학교소개\n" +
+      "학교소식\n" +
+      "교육활동\n" +
+      "학급홈페이지\n" +
+      "학교생활\n" +
+      "알림마당"
+    );
+  }
+
+
+  /* 공지사항 탭 */
+
+  function changeTab(button, type) {
+
+    document.querySelectorAll(".notice-tab")
+      .forEach(tab => {
+        tab.classList.remove("active");
+      });
+
+    button.classList.add("active");
+
+    const title = document.getElementById("mainNotice");
+
+    if (type === "notice") {
+      title.innerText =
+        "나이스 학부모서비스를 이용한 교육활동 확인 안내";
+    }
+
+    if (type === "education") {
+      title.innerText =
+        "오늘의 교육활동 및 학사 일정 안내";
+    }
+
+    if (type === "letter") {
+      title.innerText =
+        "2026학년도 가정통신문 안내";
+    }
+  }
+
+
+  /* 학년 선택 */
+
+  function selectGrade(grade) {
+
+    event.preventDefault();
+
+    alert(
+      grade + "학년 학급홈페이지를 선택했습니다."
+    );
+  }
+
+
+  /* 달력 */
+
+  let month = 9;
+
+  function previousMonth() {
+
+    month--;
+
+    if (month < 1) {
+      month = 12;
+    }
+
+    updateMonth();
+  }
+
+
+  function nextMonth() {
+
+    month++;
+
+    if (month > 12) {
+      month = 1;
+    }
+
+    updateMonth();
+  }
+
+
+  function updateMonth() {
+
+    document.querySelector(".calendar h2 span")
+      .innerText =
+      String(month).padStart(2, "0") + "월";
+
+    document.getElementById("schedule")
+      .innerHTML =
+      "📚 " + month + "월 학교 교육활동 일정<br>" +
+      "🚌 " + month + "월 현장체험학습<br>" +
+      "🎨 " + month + "월 학급별 교육활동";
+  }
+
+</script>
+
+</body>
+</html>
